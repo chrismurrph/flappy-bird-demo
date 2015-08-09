@@ -5,13 +5,29 @@
     <link href="css/style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
+    <button id="click-me-button" type="button">Click me!</button>
+    <!-- Include Scala.js compiled code -->
+    <script type="text/javascript" src="js/scala-js-tutorial-jsdeps.js"></script>
+    <script type="text/javascript" src="js/scala-js-tutorial-fastopt.js"></script>
+    <script type="text/javascript" src="js/raphael-min.js"></script>
+
     <div class="container">
+      <div id="top-area">
+      </div>
       <div id="board-area">
       </div>
     </div>
 
+    <!-- -->
     <script src="js/out/goog/base.js" type="text/javascript"></script>
     <script src="js/flappy_bird_demo.js" type="text/javascript"></script>
     <script type="text/javascript">goog.require("flappy_bird_demo.core");</script>
+
+    <!-- Run tutorial.webapp.TutorialApp -->
+    <script type="text/javascript">
+      tutorial.webapp.TutorialApp().main();
+      alert("Loaded Scala");
+    </script>
+
   </body>
 </html>

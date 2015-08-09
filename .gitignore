@@ -18,3 +18,8 @@ pom.xml.asc
 .lein-repl-history
 .nrepl-port
 .lein-classpath
+.idea/
+hello-world/
+*.log
+*.iml
+*.js

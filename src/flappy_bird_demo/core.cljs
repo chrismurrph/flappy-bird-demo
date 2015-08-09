@@ -1,7 +1,6 @@
 (ns flappy-bird-demo.core
   (:require
    [sablono.core :as sab :include-macros true]
-   [figwheel.client :as fw]
    [cljs.core.async :refer [<! chan sliding-buffer put! close! timeout]])
   (:require-macros
    [cljs.core.async.macros :refer [go-loop go]]))
@@ -79,7 +78,7 @@
 (defn update-pillars [{:keys [pillar-list cur-time] :as st}]
   (let [pillars-with-pos (map #(assoc % :cur-x (curr-pillar-pos cur-time %)) pillar-list)
         pillars-in-world (sort-by
-                          :cur-x 
+                          :cur-x
                           (filter #(> (:cur-x %) (- pillar-width)) pillars-with-pos))]
     (assoc st
       :pillar-list
@@ -168,11 +167,24 @@
        (<! (timeout 30))
        (.requestAnimationFrame js/window time-loop)))))
 
+;(def cljsLib (js/scala-js-tutorial-fastopt))
+
 (defn start-game []
   (.requestAnimationFrame
    js/window
    (fn [time]
      (reset! flap-state (reset-state @flap-state time))
+     (.log js/console "Game started, abt to NO LONGER make some paper")
+     ;(. js/scala-js-tutorial-fastopt main )
+     ;(def paper (js/Raphael 0 0 500 500))
+     ;(def circle (. paper (circle 60 60 10)))
+     ;(. circle (attr "fill" "#777"))
+     ;(.log js/console "Completed call")
+     ;tutorial.webapp.TutorialApp().main()
+     ;(.log js/console "Now to call scjs to create simplest possible object")
+     ;(def myObject (js/MyObject))
+     ;(def callResult (. myObject (someCall)))
+     ;(.log js/console (str "Called scjs and got back " callResult) )
      (time-loop time))))
 
 (defn main-template [{:keys [score cur-time jump-count
@@ -199,8 +211,8 @@
 
 (reset! flap-state @flap-state)
 
-(fw/start { :on-jsload (fn []
-                         ;; you would add this if you
-                         ;; have more than one file
-                         #_(reset! flap-state @flap-state)
-                         )})
+;(fw/start { :on-jsload (fn []
+;                         ;; you would add this if you
+;                         ;; have more than one file
+;                         #_(reset! flap-state @flap-state)
+;                         )})
