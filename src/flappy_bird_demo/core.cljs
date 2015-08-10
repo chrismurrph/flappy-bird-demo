@@ -1,6 +1,7 @@
 (ns flappy-bird-demo.core
   (:require
    [sablono.core :as sab :include-macros true]
+   [figwheel.client :as fw]
    [cljs.core.async :refer [<! chan sliding-buffer put! close! timeout]])
   (:require-macros
    [cljs.core.async.macros :refer [go-loop go]]))
@@ -182,10 +183,13 @@
      ;(.log js/console "Completed call")
      ;tutorial.webapp.TutorialApp().main()
      ;(.log js/console "Now to call scjs to create simplest possible object")
-     ;(def myObject (js/MyObject))
+     ;(def myObject (js/wiring.MyObject))
      ;(def callResult (. myObject (someCall)))
      ;(.log js/console (str "Called scjs and got back " callResult) )
      (time-loop time))))
+
+(defn successful-some-call [res]
+  (.log js/console (str "Successful return got back " res)))
 
 (defn main-template [{:keys [score cur-time jump-count
                              timer-running border-pos
@@ -211,8 +215,8 @@
 
 (reset! flap-state @flap-state)
 
-;(fw/start { :on-jsload (fn []
-;                         ;; you would add this if you
-;                         ;; have more than one file
-;                         #_(reset! flap-state @flap-state)
-;                         )})
+(fw/start { :on-jsload (fn []
+                         ;; you would add this if you
+                         ;; have more than one file
+                         #_(reset! flap-state @flap-state)
+                         )})
